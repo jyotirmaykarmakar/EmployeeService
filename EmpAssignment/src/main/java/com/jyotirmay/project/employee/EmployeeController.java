@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,27 +17,27 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@RequestMapping("/employees")
+	@GetMapping("/all-user")
 	public List<Employee> getAllEmployees(){
 		return employeeService.getAllEmployees();
 	}
 	
-	@RequestMapping("/employees/{id}")
+	@GetMapping("/find-user/{id}")
 	public Optional<Employee> getEmployee(@PathVariable String id) {
 		return employeeService.getEmployee(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/employees")
+	@GetMapping("/saveuser")
 	public void addEmployee(@RequestBody Employee employee) {
 		employeeService.addEmployee(employee);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/employees/{id}")
+	@GetMapping( value="/save-user/{id}")
 	public void updateEmployee(@RequestBody String id, Employee employee) {
 		employeeService.updateEmployee(id, employee);
 	}
 		
-	@RequestMapping(method=RequestMethod.DELETE, value="/employees/{id}")
+	@GetMapping("/delete-user/{id}")
 	public void deleteEmployee(@RequestBody String id) {
 		employeeService.deleteEmployee(id);
 	}

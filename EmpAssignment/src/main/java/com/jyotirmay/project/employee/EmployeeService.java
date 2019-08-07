@@ -15,11 +15,20 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		super();
+		this.employeeRepository = employeeRepository;
+	}
 
 	public List<Employee> getAllEmployees(){
-		List<Employee> employee = new ArrayList<>();
-		employeeRepository.findAll().forEach(employee::add);
-		return employee;
+		List<Employee> employees = new ArrayList<>();
+		//employeeRepository.findAll().forEach(employee::add);
+		for(Employee employee:employeeRepository.findAll()) {
+			employees.add(employee);
+		}
+		return employees;
 	}
 	
 	public void addEmployee(Employee employee) {
@@ -37,4 +46,9 @@ public class EmployeeService {
 	public void deleteEmployee(String id) {
 		employeeRepository.deleteById(id);
 	}
+	
+	/*public Employee findByUsenameAndPassword(String id,String password) {
+	
+		return employeeRepository.findByUsenameAndPassword(id, password);
+	}*/
 }
